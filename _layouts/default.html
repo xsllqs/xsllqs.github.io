@@ -1,56 +1,48 @@
 <!DOCTYPE html>
-<html>
-<head>
-<script id="allmobilize" charset="utf-8" src="http://a.yunshipei.com/0c2fce5114154786ea49e9caad5bd7cd/allmobilize.min.js"></script>
-<meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
-<meta charset="utf-8">
-<title>{{ page.title }}</title>
-{% if page.description %}
-<meta name="description" content="{{ page.description }}" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="{{ site.author }}" />
+    <title>{% if page.path == 'index.html' %}{{ site.name }}{% else %}{% unless page.id %}{{ site.name }} - {% endunless %}{{ page.title }}{% endif %}</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link href="/feed/" rel="alternate" title="{{ site.author }}" type="application/atom+xml" />
+    <link rel="stylesheet" href="/media/css/style.css" />
+    <link rel="stylesheet" href="/media/css/highlight.css" />
+    <script type="text/javascript" src="/media/js/jquery-1.7.1.min.js"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div id="main" role="main">
+        <header>
+        <h1>{{ page.title }}</h1>
+        </header>
+        <nav>
+        <span><a title="网站首页" class="" href="/">首页</a></span>
+        <span><a title="文章分类" class="" href="/categories/">分类</a></span>
+        <span><a title="标签索引" class="" href="/tags/">标签</a></span>
+        <!--<span><a title="友情链接" class="" href="/links/">链接</a></span>-->
+        <span><a title="留言交流" class="" href="/guestbook/">留言</a></span>
+        <span><a title="关于站长" class="" href="/about/">关于</a></span>
+        <span><a title="种子订阅" class="" href="/feed/" target="_blank">订阅</a></span>
+        </nav>
+        <article class="content">
+        {{ content }}
+        </article>
+      </div>
+
+    <footer>
+        <p><small>
+            <a href="http://github.com/{{ site.github }}/NET/new/gh-pages/_posts" target="_blank" title="撰写文章">Po</a>wer<a href="http://github.com/{{ site.github }}/NET/edit/gh-pages/{{ page.path }}" target="_blank" title="编辑页面">ed</a> by <a href="http://jekyllrb.com" target="_blank">Jekyll</a> @ <a href="http://github.com/{{ site.github }}/NET" target="_blank" title="项目主页">GitHub</a>
+             | <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/cn/" target="_blank" title="许可协议">©</a> 2004 - {{site.time | date:"%Y"}} <a href="/about/">{{ site.author }}</a>
+{% if site.beian %}
+             | <a href="http://www.miibeian.gov.cn" target="_blank">{{ site.beian }}</a>
 {% endif %}
-{% if page.keywords %}
-<meta name="keywords" content="{{ page.keywords }}" />
+{% if site.cnzz %}
+             | <script src="http://s85.cnzz.com/stat.php?id={{ site.cnzz }}"></script>
 {% endif %}
-<link rel="stylesheet" href="/static/css/base-common.css" />
-{% if page.styles %}
-{% for style in page.styles %}
-<link rel="stylesheet" href="/static/css/{{ style }}.css" />
-{% endfor %}
-{% endif %}
-<!--[if lt IE 9]>
-<script src="/static/js/html5.js"></script>
-<![endif]-->
-</head>
+         </small></p>
+    </footer>
 
-<body>
-<header>
-  <nav class="fn-clear">
-    <a href="/" id="logo" class="fn-left">Table's</a>
-    <a href="/#anchor-article" id="link-article" class="fn-left">Article</a>
-    <a href="/#anchor-project" id="link-project" class="fn-left">Project</a>
-    <a href="https://github.com/taberhuang" class="fn-left">Github</a>
-    <a href="http://www.scoop.it/u/taberh" class="fn-left">Scoop.it</a>
-    <a href="/#anchor-aboutme" id="link-aboutme" class="fn-right">About</a>
-  </nav>
-</header>
-
-<div id="main">
-{{ content }}
-</div>
-
-<footer>
-  <p>Build by <a href="https://github.com/mojombo/jekyll/wiki" target="_blank">Jekyll</a></p>
-</footer>
-
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-23358884-1']);
-_gaq.push(['_trackPageview']);
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-</body>
+    </div>
+  </body>
 </html>

@@ -1,2 +1,16 @@
 markdown: rdiscount
+permalink: /:title/
+url: http://yonsm.net
+name: xsllqs.github.io
+author: 信风
+qq: 405812999
+email: 405812999@qq.com
+duoshuo: LV
+beian: 无
+cnzz: 无
+weibo: xsllqs
+github: xsllqs
 pygments: true
+safe: true
+paginate: 20
+about: "这里是 xsllqs 的个人博客，创建于 2016 年。"
