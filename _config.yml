@@ -14,4 +14,3 @@ rouge: true
 safe: true
 paginate: 20
 about: "这里是 xsllqs 的个人博客，创建于 2016 年。"
-provider:custom
