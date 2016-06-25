@@ -19,8 +19,7 @@ tags: tomcat memcached msm linux
 
 安装tomcat需要配合JDK使用，JDK有oracle JDK和open JDK两种
 
->oracle JDK8的下载地址：http://www.oracle.com/technetwork/cn/java/javase/
-downloads/jdk8-downloads-2133151-zhs.html
+>oracle JDK8的下载地址：http://www.oracle.com/technetwork/cn/java/javase/downloads/jdk8-downloads-2133151-zhs.html
 
 >tomcat的下载地址：http://tomcat.apache.org/
 
