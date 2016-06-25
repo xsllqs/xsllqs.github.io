@@ -19,8 +19,9 @@ comments: no
 
 GitHub : [http://github.com/{{ site.github }}](http://github.com/{{ site.github }})
 
+欢迎捐赠（支付宝和 Paypal）：13677614351
+
 ----
 
-{% if site.weibo %}
+
 [![新浪微博](http://service.t.sina.com.cn/widget/qmd/{{ site.weibo }}/f78fbcd2/1.png)](http://weibo.com/u/{{ site.weibo }})
-{% endif %}

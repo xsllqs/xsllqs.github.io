@@ -1,16 +1,36 @@
+# 站点配置
+# highlighter: pygments
+pygments: true
+# 这里设置 redcarpet 作为 md 引擎为什么不会重新生成文章？即无效，这样就无法使用 fenced_code_blocks 语法来高亮代码了。但为什么 rdiscount 又能识别 `````` 中为代码却不能高亮呢？
+# markdown: rdiscount
 markdown: kramdown
-permalink: /:title/
-url: http://xsllqs.github.io
-name: xsllqs.github.io
-author: 信风
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "tables"]
+  render_options:
+# Redcarpet 支持的扩展选项: https://github.com/vmg/redcarpet
+# PHP Markdown Extra: https://michelf.ca/projects/php-markdown/extra/#table
+# redcarpet:
+        #  extensions: []
+          #    - hard_wrap
+      #    - no_intra_emphasis
+      #    - autolink
+      #    - strikethrough
+      #    - fenced_code_blocks
+safe: false
+# 个人信息
 qq: 405812999
-email: 405812999@qq.com
-duoshuo: xsllqs
-beian: 无
-cnzz: 无
+email: xsllqs@qq.com
+uyanid: 2104686
+beian: 
+cnzz: 
 weibo: 2486407184
 github: xsllqs
-rouge: true
-safe: true
-paginate: 20
-about: "这里是 xsllqs 的个人博客，创建于 2016 年。"
+
+# 站点信息设置
+url: http://xsllqs.github.io
+permalink: /:year/:month/:day/:title.html
+author: 信风
+paginate: 10
+project: xsllqs.github.io
+name: 信风
+about: "Linux的使用心得，笔记等。 如果您有好文章，欢迎分享。<br /><br />如果喜欢，请分享到微博、微信、QQ空间等。"
