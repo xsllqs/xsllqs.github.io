@@ -10,7 +10,7 @@ beian: 无
 cnzz: 无
 weibo: 2486407184
 github: xsllqs
-pygments: true
+rouge: true
 safe: true
 paginate: 20
 about: "这里是 xsllqs 的个人博客，创建于 2016 年。"
