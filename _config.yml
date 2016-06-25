@@ -1,4 +1,4 @@
-markdown: rdiscount
+markdown: kramdown
 permalink: /:title/
 url: http://xsllqs.github.io
 name: xsllqs.github.io
