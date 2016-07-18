@@ -19,7 +19,7 @@ comments: no
 
 GitHub : [http://github.com/{{ site.github }}](http://github.com/{{ site.github }})
 
-欢迎捐赠（支付宝和 Paypal）：13677614351
+欢迎捐赠（支付宝）：13677614351
 
 ----
 
