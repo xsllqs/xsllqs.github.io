@@ -266,7 +266,7 @@ demo应用我选择了一个简单的blog
 
 框选指定时间段的散点图，框选后会弹出这个时间段对应的数据
 
-![3]({{ site.url }}/assets/2016-10-7-pinpoint2.png)
+![3]({{ site.url }}/assets/2016-10-7-pinpoint3.png)
 
 ![4]({{ site.url }}/assets/2016-10-7-pinpoint4.png)
 
