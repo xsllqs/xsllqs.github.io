@@ -41,24 +41,31 @@ Pinpoint的特点如下:
 ## 1、环境准备 ##
 
 	apache-tomcat-8.0.37.tar.gz
+
 (下载地址：http://tomcat.apache.org/download-80.cgi#8.0.37)
 
 	hbase-1.0.3-bin.tar.gz
+
 （下载地址：http://apache.fayea.com/hbase/）
 
 	jdk-8u102-linux-x64.rpm
+
 （下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html）
 
 	pinpoint-agent-1.5.2.tar.gz
+
 （下载地址：https://github.com/naver/pinpoint/releases/tag/1.5.2）
 
 	pinpoint-collector-1.5.2.war
+
 （下载地址：https://github.com/naver/pinpoint/releases/tag/1.5.2）
 
 	pinpoint-web-1.5.2.war
+
 （下载地址：https://github.com/naver/pinpoint/releases/tag/1.5.2）
 
 	zookeeper-3.4.6-10.el6.x86_64.rpm
+
 （下载地址：http://apache.fayea.com/zookeeper/）
 
 全部放入/root/pp目录
