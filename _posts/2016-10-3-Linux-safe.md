@@ -5,6 +5,10 @@ title: Linux系统安全设置
 categories: linux
 tags: Linux系统安全 信息安全 密码安全 远程登录控制
 ---
+根据此文章写了一个自动检测脚本
+
+脚本位置：[https://xsllqs.github.io/2016/10/16/Linux-safe-shell.html](https://xsllqs.github.io/2016/10/16/Linux-safe-shell.html "https://xsllqs.github.io/2016/10/16/Linux-safe-shell.html")
+
 一、账号管理
 
 1、用户密码
