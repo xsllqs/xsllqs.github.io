@@ -41,7 +41,7 @@ tags: Linux系统安全 信息安全 密码安全 远程登录控制 shell脚本
 		echo "/etc/login.defs的PASS_MIN_DAYS不为0 为$psminday"
 	fi
 	
-	if [ $pswarn -ne 0 ];then
+	if [ $pswarn -ne 14 ];then
 		echo "/etc/login.defs的PASS_WARN_AGE不为14 为$pswarn"
 	fi
 	
