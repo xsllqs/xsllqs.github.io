@@ -14,7 +14,7 @@ git地址为：https://github.com/naver/pinpoint
 
 架构
 
-![1]({{ site.url }}/assets/2016-10-7-pinpoint1.png)
+![1](https://xsllqs.github.io/assets/2016-10-7-pinpoint1.png)
 
 Pinpoint的特点如下:
 
@@ -265,17 +265,17 @@ demo应用我选择了一个简单的blog
 
 先进入demo应用随便点几个按钮操作一下
 
-![5]({{ site.url }}/assets/2016-10-7-pinpoint5.png)
+![5](https://xsllqs.github.io/assets/2016-10-7-pinpoint5.png)
 
 打开pinpoint页面，选中对应的主机和查看时间，查询时间不能超过2天外的
 
-![2]({{ site.url }}/assets/2016-10-7-pinpoint2.png)
+![2](https://xsllqs.github.io/assets/2016-10-7-pinpoint2.png)
 
 框选指定时间段的散点图，框选后会弹出这个时间段对应的数据
 
-![3]({{ site.url }}/assets/2016-10-7-pinpoint3.png)
+![3](https://xsllqs.github.io/assets/2016-10-7-pinpoint3.png)
 
-![4]({{ site.url }}/assets/2016-10-7-pinpoint4.png)
+![4](https://xsllqs.github.io/assets/2016-10-7-pinpoint4.png)
 
 ## 10、说明 ##
 
