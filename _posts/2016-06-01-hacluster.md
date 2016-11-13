@@ -6,7 +6,7 @@ categories: linux
 tags: HA Cluster corosync pacemaker crmsh 高可用 集群
 ---
 
-一、高可用集群框架
+# 一、高可用集群框架 #
 
 ![1](https://xsllqs.github.io/assets/2016-06-01-hacluster1.png)
 
@@ -35,7 +35,7 @@ HA集群常用的工作模型：
     fencing：资源级别的隔离，类似通过向交换机发出隔离信号，特意让数据无法通过此接口
     当集群分裂，即分裂后的一个集群的法定票数小于总票数一半时采取对资源的控制策略，
 
-二、在centos7上建立Ha cluster
+# 二、在centos7上建立Ha cluster #
 
 centos7(corosync v2 + pacemaker)
 
@@ -44,7 +44,7 @@ centos7(corosync v2 + pacemaker)
     pcs agent(pcsd)
     crmsh agentless (pssh)
 
-1、集群配置前提
+## 1、集群配置前提 ##
 
 时间同步，基于当前正在使用的主机名互相访问，是否会用到仲裁设备
 
@@ -66,7 +66,7 @@ centos7(corosync v2 + pacemaker)
 	2016年 05月 28日 星期六 131807 CST
 	2016年 05月 28日 星期六 131807 CST
 
-2、安装pcs并启动集群
+## 2、安装pcs并启动集群 ##
 
 	#192.168.1.113
 	[root@ns3 ~]# yum install pcs
@@ -230,7 +230,7 @@ centos7(corosync v2 + pacemaker)
 	  pacemaker activedisabled
 	  pcsd activeenabled
 
-3、使用crmsh配置集群
+## 3、使用crmsh配置集群 ##
 
 安装opensuse上的yum源
 
@@ -261,7 +261,7 @@ centos7
 	
 	Full list of resources
 
-4、两个节点上分别装上httpd
+## 4、两个节点上分别装上httpd ##
 
 	[root@ns2 ~]# ansible ha -m shell -a 'yum install httpd -y'
 	[root@ns2 ~]# echo h1ns2.xinfeng.comh1  varwwwhtmlindex.html
@@ -273,7 +273,7 @@ centos7
 	#centos7必须关闭服务，开起开机启动
 	[root@ns2 ~]# ansible ha -m service -a 'name=httpd state=stopped enabled=yes'
 
-5、配置集群
+## 5、配置集群 ##
 
 VIP为192.168.1.91，服务是httpd，将VIP和httpd作为资源来进行配置
 
@@ -500,7 +500,7 @@ VIP为192.168.1.91，服务是httpd，将VIP和httpd作为资源来进行配置
 	
 	Full list of resources
 
-6、重新定义带有监控的资源
+## 6、重新定义带有监控的资源 ##
 
 	crm(live)# configure
 	#每60秒监控一次，超时时长为20秒，时间不能小于建议时长，否则会报错
@@ -557,7 +557,7 @@ VIP为192.168.1.91，服务是httpd，将VIP和httpd作为资源来进行配置
 
 ![4](https://xsllqs.github.io/assets/2016-06-01-hacluster4.png)
 
-7、【注意】当重新恢复httpd服务后记得清除资源的错误信息，否则无法启动资源
+## 7、【注意】当重新恢复httpd服务后记得清除资源的错误信息，否则无法启动资源 ##
 
 	crm(live)# resource
 	crm(live)resource# cleanup webser    #清楚webser之前的错误信息
@@ -568,7 +568,7 @@ VIP为192.168.1.91，服务是httpd，将VIP和httpd作为资源来进行配置
 	 webip	(ocfheartbeatIPaddr)	Started
 	 webser	(systemdhttpd)	Started
 
-8、定义资源约束
+## 8、定义资源约束 ##
 
 删除组资源
 
@@ -656,7 +656,7 @@ VIP为192.168.1.91，服务是httpd，将VIP和httpd作为资源来进行配置
 	 webip	(ocfheartbeatIPaddr)	Started ns3.xinfeng.com    #很明显，资源都转移到了ns3上了
 	 webser	(systemdhttpd)	Started ns3.xinfeng.com
 
-三、总结   
+# 三、总结 #
 
 1、当重新恢复资源的服务后一定记得清除资源的错误信息，否则无法启动资源
 
