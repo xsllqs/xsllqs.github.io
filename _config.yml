@@ -27,10 +27,10 @@ weibo: 2486407184
 github: xsllqs
 
 # 站点信息设置
-url: http://xsllqs.github.io
+url: https://xsllqs.github.io
 permalink: /:year/:month/:day/:title.html
 author: 信风
-paginate: 10
+paginate: 100
 project: xsllqs.github.io
 name: 信风
 about: "Linux的使用心得，笔记等。 如果您有好文章，欢迎分享。<br /><br />如果喜欢，请分享到微博、微信、QQ空间等。"
