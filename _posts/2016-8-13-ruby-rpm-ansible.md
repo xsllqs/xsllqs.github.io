@@ -160,7 +160,7 @@ tags: ruby gem fpm zabbix zabbix_agent rpm包制作 ansible
 	    ├── zabbix_agentd.conf
 	    └── zabbix_agentd.conf.d
 
-# 四、制作RPM包
+# 四、制作RPM包 #
 
 	[root@lvs1 ~]# fpm -s dir -t rpm -n zabbix_agentd -v 3.0.4 -C / -p /root/ --post-install /opt/install_after.sh --post-uninstall /opt/remove_after.sh --no-rpm-sign /opt
 
@@ -189,20 +189,20 @@ tags: ruby gem fpm zabbix zabbix_agent rpm包制作 ansible
 
 	root@lv:~# vim /etc/ansible/hosts 
 	[lvs]
-	192.168.80.138 ansible_ssh_user=abc ansible_ssh_password=!@#qwe ansible_sudo_pass=!@#qwe
+	192.168.80.138 ansible_ssh_user=abc ansible_ssh_pass=!@#qwe ansible_sudo_pass=!@#qwe
 
 用ifconfig命令测试下是否能正常使用，这里解释下-k命令，因为我公司sudo命令后是要输密码的，所以这里加了-k
 
-	root@lv:~# ansible lvs -s -k -m command -a 'ifconfig'
+	root@lv:~# ansible lvs -s -m command -a 'ifconfig'
 
 将制作好的rpm复制给lvs组所有成员主机
 
-	root@lv:~# ansible lvs -s -k -m copy -a 'src=/root/zabbix_agentd-3.0.4-1.x86_64.rpm dest=/root/'
+	root@lv:~# ansible lvs -s -m copy -a 'src=/root/zabbix_agentd-3.0.4-1.x86_64.rpm dest=/root/'
 
 给所有主机上的rpm包执行权限，其实不给也没影响
 
-	root@lv:~# ansible lvs -s -k -m command -a 'chmod +x /root/zabbix_agentd-3.0.4-1.x86_64.rpm'
+	root@lv:~# ansible lvs -s -m command -a 'chmod +x /root/zabbix_agentd-3.0.4-1.x86_64.rpm'
 
 安装rpm包，因为我们设置的安装完启动，所以这部完成后就大功告成了
 
-	root@lv:~# ansible lvs -s -k -m command -a 'rpm -ivh /root/zabbix_agentd-3.0.4-1.x86_64.rpm'
+	root@lv:~# ansible lvs -s -m command -a 'rpm -ivh /root/zabbix_agentd-3.0.4-1.x86_64.rpm'
