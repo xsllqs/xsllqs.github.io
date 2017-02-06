@@ -357,3 +357,7 @@ http://172.19.2.51/#!/cluster
 ## 2、kibana ##
 
 http://172.19.2.51:5601/
+
+## 3、所有配置文件已上传git ##
+
+https://github.com/xsllqs/Blogfile/tree/master/elk
