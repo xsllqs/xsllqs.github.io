@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>亲爱的十六，很爱你！</title>
+
+<style type="text/css">
+@font-face {
+	font-family: digit;
+	src: url('digital-7_mono.ttf') format("truetype");
+}
+</style>
+
+<link href="css/default.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/garden.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+
+</head>
+
+<body>
+	<audio autoplay="autopaly">
+					<source src="./css/qfdy.mp3" type="audio/mp3" />
+	</audio>  
+<div id="mainDiv">
+	<div id="content">
+		<div id="code">
+			<span class="comments">/**</span><br />
+			<span class="space"/><span class="comments">*2016-10-15  第一次认识作为处女座却不像处女座的你!</span><br />
+			<span class="space"/><span class="comments">*2016-10-28  你说，我希望我以后离开了重庆，我们还能像现在这样!</span><br />
+			<span class="space"/><span class="comments">*2016-10-31  第一次和你约会，电梯上伸手牵你被甩开，尴尬，但瞬间就被你主动伸来的手温暖了，惊喜!</span><br />
+			<span class="space"/><span class="comments">*2016-10-31  这真的是很重要的一天，吃完了烤肉喝完了酸奶牛，送你回家的时候吻了你，我心都要跳出来了，原谅我吻得太拙劣。</span><br />
+			<span class="space"/><span class="comments">*2016-11-02  我告诉你，这个冬天我陪你过，你说好。现在冬天过完了，我依然想陪你过之后的每个春夏秋冬的每一天！</span><br />
+			<span class="space"/><span class="comments">*2016-02-11  你离开了重庆，我想告诉你，不管你在哪儿，我的心都在你身边！</span><br />
+			<span class="space"/><span class="comments">*/</span><br />
+			Boy name = <span class="keyword">Mr</span> 十八<br />
+			Girl name = <span class="keyword">Mrs</span> 十六<br />
+			<span class="comments">// Fall in love river. </span><br />
+			The boy love the girl;<br />
+			<span class="comments">// They love each other.</span><br />
+			The girl loved the boy;<br />
+			<span class="comments">// AS time goes on.</span><br />
+			The boy can not be separated the girl;<br />
+			<span class="comments">// At the same time.</span><br />
+			The girl can not be separated the boy;<br />
+			<span class="comments">// Both wind and snow all over the sky.</span><br />
+			<span class="comments">// Whether on foot or 5 kilometers.</span><br />
+			<span class="keyword">The boy</span> very <span class="keyword">happy</span>;<br />
+			<span class="keyword">The girl</span> is also very <span class="keyword">happy</span>;<br />
+			<span class="placeholder"/><span class="comments">// Whether it is right now</span><br />
+			<span class="placeholder"/><span class="comments">// Still in the distant future.</span><br />
+			<span class="placeholder"/>The boy has but one dream;<br />
+			<span class="comments">// The boy wants the girl could well have been happy.</span><br />
+			<br>
+			<br>
+			I want to say:<br />
+			Baby, I love you forever;<br />
+		</div>
+		<div id="loveHeart">
+			<canvas id="garden"></canvas>
+			<div id="words">
+				<div id="messages">
+					亲爱的，这是我们相爱在一起的时光。
+					<div id="elapseClock"></div>
+				</div>
+				<div id="loveu">
+					愿它一直走下去，像我们的爱！<br/>
+					直到永远!<br/>
+					<div class="signature">- 十八</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+var offsetX = $("#loveHeart").width() / 2;
+var offsetY = $("#loveHeart").height() / 2 - 55;
+var together = new Date();
+together.setFullYear(2016, 9, 15);//月份是从0到11计算的
+together.setHours(11);//时间是从0到23计算的
+together.setMinutes(0);
+together.setSeconds(0);
+together.setMilliseconds(0);
+
+if (!document.createElement('canvas').getContext) {
+    var msg = document.createElement("div");
+    msg.id = "errorMsg";
+    msg.innerHTML = "Your browser doesn't support HTML5!<br/>Recommend use Chrome 14+/IE 9+/Firefox 7+/Safari 4+";
+    document.body.appendChild(msg);
+    $("#code").css("display", "none")
+    $("#copyright").css("position", "absolute");
+    $("#copyright").css("bottom", "10px");
+    document.execCommand("stop");
+} else {
+    setTimeout(function () {
+        startHeartAnimation();
+    }, 5000);
+
+    timeElapse(together);
+    setInterval(function () {
+        timeElapse(together);
+    }, 500);
+
+    adjustCodePosition();
+    $("#code").typewriter();
+}
+</script>
+
+<div style="text-align:center;clear:both">
+<p>允我三生三世,许你十里桃花。<br/>不论未来多艰难，我们一起走过，不管你走多远，永远爱你，永远和你在一起！</p>
+<p>Powered by ：十八</p>
+<p><a href="https://xsllqs.github.io/love">我爱你</p>
+</div>
+</body>
+</html>
+
