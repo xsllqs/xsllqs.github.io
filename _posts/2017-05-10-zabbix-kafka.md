@@ -6,26 +6,26 @@ categories: linux
 tags: zabbix kafka
 ---
 
-#一、Kafka监控的几个指标#
+# 一、Kafka监控的几个指标 #
 
 	1、lag：多少消息没有消费
 	2、logsize：Kafka存的消息总数
 	3、offset：已经消费的消息
 
 
-#二、查看zookeeper配置#
+# 二、查看zookeeper配置 #
 
 	cat /home/app/zookeeper/zookeeper/conf/zoo.cfg | egrep -v "^$|^#"
 	clientPort=2181
 
-#三、查看kafka配置#
+# 三、查看kafka配置 #
 
 	cat /home/app/kafka/kafka/config/server.properties | egrep -v "^$|^#"
 	port=9092
 	host.name=192.168.38.87
 	zookeeper.connect=192.168.38.87:2181,192.168.38.88:2181
 
-#四、查看kafka的group name#
+# 四、查看kafka的group name #
 
 	cd /home/app/zookeeper/zookeeper/bin
 	./zkCli.sh -server 192.168.38.87:2181
@@ -33,12 +33,12 @@ tags: zabbix kafka
 	lijieGroup
 	quit
 
-#五、查看kafka的topic_name#
+# 五、查看kafka的topic_name #
 
 	/home/app/kafka/kafka/bin/kafka-run-class.sh kafka.tools.ConsumerOffsetChecker --group=lijieGroup --zookeeper=192.168.38.87:2181
 
 
-#六、修改zabbix配置文件
+# 六、修改zabbix配置文件 #
 
 因为zabbix用户不能调用kafka的脚本，需要root用户启动zabbix_agent
 
@@ -55,7 +55,7 @@ tags: zabbix kafka
 	chown -R zabbix:zabbix /opt/zabbix/zabbix_agentd.conf.d/kafka_status.conf
 	chmod -R 777 /opt/zabbix/zabbix_agentd.conf.d/kafka_status.conf
 
-#七、创建监控脚本#
+# 七、创建监控脚本 #
 	mkdir -pv /home/zabbix_scripts/
 	vim /home/zabbix_scripts/kafka_mon.sh
 	#!/bin/bash
@@ -100,7 +100,7 @@ tags: zabbix kafka
 	    ;;
 	esac
 
-#八、给脚本和对应文件权限#
+# 八、给脚本和对应文件权限 #
 
 	chown -R zabbix:zabbix /home/zabbix_scripts/kafka_mon.sh
 	chmod -R 777 /home/zabbix_scripts/kafka_mon.sh
@@ -111,12 +111,12 @@ tags: zabbix kafka
 	
 	chmod 777  /home/app/kafka/kafka/bin/kafka-run-class.sh
 
-#九、重启zabbix
+# 九、重启zabbix #
 
 	/opt/zabbix/sbin/zabbix_agentd -c /opt/zabbix/zabbix_agentd.conf
 
 
-#十、监控上增加3个键值
+# 十、监控上增加3个键值 #
 
 	kafka.offset[RouterOnOfflineStateChange,lijieGroup]
 	kafka.logsize[RouterOnOfflineStateChange,lijieGroup]
