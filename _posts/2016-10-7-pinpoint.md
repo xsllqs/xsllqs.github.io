@@ -130,6 +130,8 @@ Pinpoint的特点如下:
 
 	http://192.168.80.144:16010/master-status
 
+如果部署的hadoop或者hbase，所有需要部署的主机的主机名一定要和hadoop、hbase中配置的一致
+
 ## 5、安装zookeeper ##
 
 安装启动zookeeper
@@ -253,7 +255,9 @@ demo应用我选择了一个简单的blog
 		profiler.collector.ip=192.168.80.144
 	停掉应用
 	[root@localhost ~]# catalina.sh stop
-	在应用的catalina.sh最开头处添加
+	
+	建议一定要在应用的catalina.sh最开头处添加一下内容
+
 	[root@localhost ~]# vim /usr/local/tomcat/bin/catalina.sh
 		CATALINA_OPTS="$CATALINA_OPTS -javaagent:/data/projects/service/pinpoint-agent-1.5.2/pinpoint-bootstrap-1.5.2.jar"
 		CATALINA_OPTS="$CATALINA_OPTS -Dpinpoint.agentId=0000003"
