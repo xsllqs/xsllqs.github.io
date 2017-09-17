@@ -1,22 +1,25 @@
 ---
 date: 2017-06-15 11:12:52+08:00
 layout: post
-title: kubernetes¼¯Èº²¿Êð
+title: kubernetesé›†ç¾¤éƒ¨ç½²
 categories: linux
 tags: kubernetes
 ---
 
 
-²Î¿¼ÎÄµµ£ºhttps://github.com/opsnull/follow-me-install-kubernetes-cluster
+å‚è€ƒæ–‡æ¡£ï¼šhttps://github.com/opsnull/follow-me-install-kubernetes-cluster
 
-°²×°»·¾³
+å®‰è£…çŽ¯å¢ƒ
+
 172.19.2.49(kube-apiserver,kube-controller-manager,kube-dns,kube-proxy,kubectl,etcd)
+
 172.19.2.50(kubectl,etcd,kube-proxy)
+
 172.19.2.51(kubectl,etcd,kube-proxy)
 
-# Ò»¡¢´´½¨ CA Ö¤ÊéºÍÃØÔ¿£¬²¢ÌáÇ°ÉèÖÃ»·¾³±äÁ¿ #
+# ä¸€ã€åˆ›å»º CA è¯ä¹¦å’Œç§˜é’¥ï¼Œå¹¶æå‰è®¾ç½®çŽ¯å¢ƒå˜é‡ #
 
-172.19.2.49ÉÏ½øÐÐ²Ù×÷
+172.19.2.49ä¸Šè¿›è¡Œæ“ä½œ
 
 	mkdir -pv /root/local/bin
 	vim /root/local/bin/environment.sh
@@ -24,150 +27,150 @@ tags: kubernetes
 
 	export PATH=/root/local/bin:$PATH
 
-	# TLS Bootstrapping Ê¹ÓÃµÄ Token£¬¿ÉÒÔÊ¹ÓÃÃüÁî head -c 16 /dev/urandom | od -An -t x | tr -d ' ' Éú³É
+	# TLS Bootstrapping ä½¿ç”¨çš„ Tokenï¼Œå¯ä»¥ä½¿ç”¨å‘½ä»¤ head -c 16 /dev/urandom | od -An -t x | tr -d ' ' ç”Ÿæˆ
 	BOOTSTRAP_TOKEN="11d74483444fb57f6a1cc114ed715949"
 
-	# ×îºÃÊ¹ÓÃ Ö÷»úÎ´ÓÃµÄÍø¶Î À´¶¨Òå·þÎñÍø¶ÎºÍ Pod Íø¶Î
+	# æœ€å¥½ä½¿ç”¨ ä¸»æœºæœªç”¨çš„ç½‘æ®µ æ¥å®šä¹‰æœåŠ¡ç½‘æ®µå’Œ Pod ç½‘æ®µ
 
-	# ·þÎñÍø¶Î (Service CIDR£©£¬²¿ÊðÇ°Â·ÓÉ²»¿É´ï£¬²¿Êðºó¼¯ÈºÄÚÊ¹ÓÃIP:Port¿É´ï
+	# æœåŠ¡ç½‘æ®µ (Service CIDRï¼‰ï¼Œéƒ¨ç½²å‰è·¯ç”±ä¸å¯è¾¾ï¼Œéƒ¨ç½²åŽé›†ç¾¤å†…ä½¿ç”¨IP:Portå¯è¾¾
 	SERVICE_CIDR="10.254.0.0/16"
 
-	# POD Íø¶Î (Cluster CIDR£©£¬²¿ÊðÇ°Â·ÓÉ²»¿É´ï£¬**²¿Êðºó**Â·ÓÉ¿É´ï(flanneld±£Ö¤)
+	# POD ç½‘æ®µ (Cluster CIDRï¼‰ï¼Œéƒ¨ç½²å‰è·¯ç”±ä¸å¯è¾¾ï¼Œ**éƒ¨ç½²åŽ**è·¯ç”±å¯è¾¾(flanneldä¿è¯)
 	CLUSTER_CIDR="172.30.0.0/16"
 
-	# ·þÎñ¶Ë¿Ú·¶Î§ (NodePort Range)
+	# æœåŠ¡ç«¯å£èŒƒå›´ (NodePort Range)
 	export NODE_PORT_RANGE="8400-9000"
 
-	# etcd ¼¯Èº·þÎñµØÖ·ÁÐ±í
+	# etcd é›†ç¾¤æœåŠ¡åœ°å€åˆ—è¡¨
 	export ETCD_ENDPOINTS="https://172.19.2.49:2379,https://172.19.2.50:2379,https://172.19.2.51:2379"
 
-	# flanneld ÍøÂçÅäÖÃÇ°×º
+	# flanneld ç½‘ç»œé…ç½®å‰ç¼€
 	export FLANNEL_ETCD_PREFIX="/kubernetes/network"
 
-	# kubernetes ·þÎñ IP (Ò»°ãÊÇ SERVICE_CIDR ÖÐµÚÒ»¸öIP)
+	# kubernetes æœåŠ¡ IP (ä¸€èˆ¬æ˜¯ SERVICE_CIDR ä¸­ç¬¬ä¸€ä¸ªIP)
 	export CLUSTER_KUBERNETES_SVC_IP="10.254.0.1"
 
-	# ¼¯Èº DNS ·þÎñ IP (´Ó SERVICE_CIDR ÖÐÔ¤·ÖÅä)
+	# é›†ç¾¤ DNS æœåŠ¡ IP (ä»Ž SERVICE_CIDR ä¸­é¢„åˆ†é…)
 	export CLUSTER_DNS_SVC_IP="10.254.0.2"
 
-	# ¼¯Èº DNS ÓòÃû
+	# é›†ç¾¤ DNS åŸŸå
 	export CLUSTER_DNS_DOMAIN="cluster.local."
 
-	# µ±Ç°²¿ÊðµÄ»úÆ÷Ãû³Æ(Ëæ±ã¶¨Òå£¬Ö»ÒªÄÜÇø·Ö²»Í¬»úÆ÷¼´¿É)
+	# å½“å‰éƒ¨ç½²çš„æœºå™¨åç§°(éšä¾¿å®šä¹‰ï¼Œåªè¦èƒ½åŒºåˆ†ä¸åŒæœºå™¨å³å¯)
 	export NODE_NAME=etcd-host0 
-	# µ±Ç°²¿ÊðµÄ»úÆ÷ IP
+	# å½“å‰éƒ¨ç½²çš„æœºå™¨ IP
 	export NODE_IP=172.19.2.49
-	# etcd ¼¯ÈºËùÓÐ»úÆ÷ IP
+	# etcd é›†ç¾¤æ‰€æœ‰æœºå™¨ IP
 	export NODE_IPS="172.19.2.49 172.19.2.50 172.19.2.51"
-	# etcd ¼¯Èº¼äÍ¨ÐÅµÄIPºÍ¶Ë¿Ú 
+	# etcd é›†ç¾¤é—´é€šä¿¡çš„IPå’Œç«¯å£ 
 	export ETCD_NODES=etcd-host0=https://172.19.2.49:2380,etcd-host1=https://172.19.2.50:2380,etcd-host2=https://172.19.2.51:2380
 
-	# Ìæ»»Îª kubernetes maste ¼¯ÈºÈÎÒ»»úÆ÷ IP
+	# æ›¿æ¢ä¸º kubernetes maste é›†ç¾¤ä»»ä¸€æœºå™¨ IP
 	export MASTER_IP=172.19.2.49
 	export KUBE_APISERVER="https://${MASTER_IP}:6443"
 
 	scp /root/local/bin/environment.sh app@172.19.2.50:/home/app
 	scp /root/local/bin/environment.sh app@172.19.2.51:/home/app
 
-172.19.2.50µÄ»·¾³±äÁ¿ÅäÖÃ
+172.19.2.50çš„çŽ¯å¢ƒå˜é‡é…ç½®
 
 	vim /home/app/environment.sh
 	#!/usr/bin/bash
 
 	export PATH=/root/local/bin:$PATH
 
-	# TLS Bootstrapping Ê¹ÓÃµÄ Token£¬¿ÉÒÔÊ¹ÓÃÃüÁî head -c 16 /dev/urandom | od -An -t x | tr -d ' ' Éú³É
+	# TLS Bootstrapping ä½¿ç”¨çš„ Tokenï¼Œå¯ä»¥ä½¿ç”¨å‘½ä»¤ head -c 16 /dev/urandom | od -An -t x | tr -d ' ' ç”Ÿæˆ
 	BOOTSTRAP_TOKEN="11d74483444fb57f6a1cc114ed715949"
 
-	# ×îºÃÊ¹ÓÃ Ö÷»úÎ´ÓÃµÄÍø¶Î À´¶¨Òå·þÎñÍø¶ÎºÍ Pod Íø¶Î
+	# æœ€å¥½ä½¿ç”¨ ä¸»æœºæœªç”¨çš„ç½‘æ®µ æ¥å®šä¹‰æœåŠ¡ç½‘æ®µå’Œ Pod ç½‘æ®µ
 
-	# ·þÎñÍø¶Î (Service CIDR£©£¬²¿ÊðÇ°Â·ÓÉ²»¿É´ï£¬²¿Êðºó¼¯ÈºÄÚÊ¹ÓÃIP:Port¿É´ï
+	# æœåŠ¡ç½‘æ®µ (Service CIDRï¼‰ï¼Œéƒ¨ç½²å‰è·¯ç”±ä¸å¯è¾¾ï¼Œéƒ¨ç½²åŽé›†ç¾¤å†…ä½¿ç”¨IP:Portå¯è¾¾
 	SERVICE_CIDR="10.254.0.0/16"
 
-	# POD Íø¶Î (Cluster CIDR£©£¬²¿ÊðÇ°Â·ÓÉ²»¿É´ï£¬**²¿Êðºó**Â·ÓÉ¿É´ï(flanneld±£Ö¤)
+	# POD ç½‘æ®µ (Cluster CIDRï¼‰ï¼Œéƒ¨ç½²å‰è·¯ç”±ä¸å¯è¾¾ï¼Œ**éƒ¨ç½²åŽ**è·¯ç”±å¯è¾¾(flanneldä¿è¯)
 	CLUSTER_CIDR="172.30.0.0/16"
 
-	# ·þÎñ¶Ë¿Ú·¶Î§ (NodePort Range)
+	# æœåŠ¡ç«¯å£èŒƒå›´ (NodePort Range)
 	export NODE_PORT_RANGE="8400-9000"
 
-	# etcd ¼¯Èº·þÎñµØÖ·ÁÐ±í
+	# etcd é›†ç¾¤æœåŠ¡åœ°å€åˆ—è¡¨
 	export ETCD_ENDPOINTS="https://172.19.2.49:2379,https://172.19.2.50:2379,https://172.19.2.51:2379"
 
-	# flanneld ÍøÂçÅäÖÃÇ°×º
+	# flanneld ç½‘ç»œé…ç½®å‰ç¼€
 	export FLANNEL_ETCD_PREFIX="/kubernetes/network"
 
-	# kubernetes ·þÎñ IP (Ò»°ãÊÇ SERVICE_CIDR ÖÐµÚÒ»¸öIP)
+	# kubernetes æœåŠ¡ IP (ä¸€èˆ¬æ˜¯ SERVICE_CIDR ä¸­ç¬¬ä¸€ä¸ªIP)
 	export CLUSTER_KUBERNETES_SVC_IP="10.254.0.1"
 
-	# ¼¯Èº DNS ·þÎñ IP (´Ó SERVICE_CIDR ÖÐÔ¤·ÖÅä)
+	# é›†ç¾¤ DNS æœåŠ¡ IP (ä»Ž SERVICE_CIDR ä¸­é¢„åˆ†é…)
 	export CLUSTER_DNS_SVC_IP="10.254.0.2"
 
-	# ¼¯Èº DNS ÓòÃû
+	# é›†ç¾¤ DNS åŸŸå
 	export CLUSTER_DNS_DOMAIN="cluster.local."
 
-	# µ±Ç°²¿ÊðµÄ»úÆ÷Ãû³Æ(Ëæ±ã¶¨Òå£¬Ö»ÒªÄÜÇø·Ö²»Í¬»úÆ÷¼´¿É)
+	# å½“å‰éƒ¨ç½²çš„æœºå™¨åç§°(éšä¾¿å®šä¹‰ï¼Œåªè¦èƒ½åŒºåˆ†ä¸åŒæœºå™¨å³å¯)
 	export NODE_NAME=etcd-host1
-	# µ±Ç°²¿ÊðµÄ»úÆ÷ IP
+	# å½“å‰éƒ¨ç½²çš„æœºå™¨ IP
 	export NODE_IP=172.19.2.50
-	# etcd ¼¯ÈºËùÓÐ»úÆ÷ IP
+	# etcd é›†ç¾¤æ‰€æœ‰æœºå™¨ IP
 	export NODE_IPS="172.19.2.49 172.19.2.50 172.19.2.51"
-	# etcd ¼¯Èº¼äÍ¨ÐÅµÄIPºÍ¶Ë¿Ú 
+	# etcd é›†ç¾¤é—´é€šä¿¡çš„IPå’Œç«¯å£ 
 	export ETCD_NODES=etcd-host0=https://172.19.2.49:2380,etcd-host1=https://172.19.2.50:2380,etcd-host2=https://172.19.2.51:2380
-	# Ìæ»»Îª kubernetes maste ¼¯ÈºÈÎÒ»»úÆ÷ IP
+	# æ›¿æ¢ä¸º kubernetes maste é›†ç¾¤ä»»ä¸€æœºå™¨ IP
 	export MASTER_IP=172.19.2.49
 	export KUBE_APISERVER="https://${MASTER_IP}:6443"
 
-172.19.2.51µÄ»·¾³±äÁ¿ÅäÖÃ
+172.19.2.51çš„çŽ¯å¢ƒå˜é‡é…ç½®
 
 	vim /home/app/environment.sh
 	#!/usr/bin/bash
 
 	export PATH=/root/local/bin:$PATH
 
-	# TLS Bootstrapping Ê¹ÓÃµÄ Token£¬¿ÉÒÔÊ¹ÓÃÃüÁî head -c 16 /dev/urandom | od -An -t x | tr -d ' ' Éú³É
+	# TLS Bootstrapping ä½¿ç”¨çš„ Tokenï¼Œå¯ä»¥ä½¿ç”¨å‘½ä»¤ head -c 16 /dev/urandom | od -An -t x | tr -d ' ' ç”Ÿæˆ
 	BOOTSTRAP_TOKEN="11d74483444fb57f6a1cc114ed715949"
 
-	# ×îºÃÊ¹ÓÃ Ö÷»úÎ´ÓÃµÄÍø¶Î À´¶¨Òå·þÎñÍø¶ÎºÍ Pod Íø¶Î
+	# æœ€å¥½ä½¿ç”¨ ä¸»æœºæœªç”¨çš„ç½‘æ®µ æ¥å®šä¹‰æœåŠ¡ç½‘æ®µå’Œ Pod ç½‘æ®µ
 
-	# ·þÎñÍø¶Î (Service CIDR£©£¬²¿ÊðÇ°Â·ÓÉ²»¿É´ï£¬²¿Êðºó¼¯ÈºÄÚÊ¹ÓÃIP:Port¿É´ï
+	# æœåŠ¡ç½‘æ®µ (Service CIDRï¼‰ï¼Œéƒ¨ç½²å‰è·¯ç”±ä¸å¯è¾¾ï¼Œéƒ¨ç½²åŽé›†ç¾¤å†…ä½¿ç”¨IP:Portå¯è¾¾
 	SERVICE_CIDR="10.254.0.0/16"
 
-	# POD Íø¶Î (Cluster CIDR£©£¬²¿ÊðÇ°Â·ÓÉ²»¿É´ï£¬**²¿Êðºó**Â·ÓÉ¿É´ï(flanneld±£Ö¤)
+	# POD ç½‘æ®µ (Cluster CIDRï¼‰ï¼Œéƒ¨ç½²å‰è·¯ç”±ä¸å¯è¾¾ï¼Œ**éƒ¨ç½²åŽ**è·¯ç”±å¯è¾¾(flanneldä¿è¯)
 	CLUSTER_CIDR="172.30.0.0/16"
 
-	# ·þÎñ¶Ë¿Ú·¶Î§ (NodePort Range)
+	# æœåŠ¡ç«¯å£èŒƒå›´ (NodePort Range)
 	export NODE_PORT_RANGE="8400-9000"
 
-	# etcd ¼¯Èº·þÎñµØÖ·ÁÐ±í
+	# etcd é›†ç¾¤æœåŠ¡åœ°å€åˆ—è¡¨
 	export ETCD_ENDPOINTS="https://172.19.2.49:2379,https://172.19.2.50:2379,https://172.19.2.51:2379"
 
-	# flanneld ÍøÂçÅäÖÃÇ°×º
+	# flanneld ç½‘ç»œé…ç½®å‰ç¼€
 	export FLANNEL_ETCD_PREFIX="/kubernetes/network"
 
-	# kubernetes ·þÎñ IP (Ò»°ãÊÇ SERVICE_CIDR ÖÐµÚÒ»¸öIP)
+	# kubernetes æœåŠ¡ IP (ä¸€èˆ¬æ˜¯ SERVICE_CIDR ä¸­ç¬¬ä¸€ä¸ªIP)
 	export CLUSTER_KUBERNETES_SVC_IP="10.254.0.1"
 
-	# ¼¯Èº DNS ·þÎñ IP (´Ó SERVICE_CIDR ÖÐÔ¤·ÖÅä)
+	# é›†ç¾¤ DNS æœåŠ¡ IP (ä»Ž SERVICE_CIDR ä¸­é¢„åˆ†é…)
 	export CLUSTER_DNS_SVC_IP="10.254.0.2"
 
-	# ¼¯Èº DNS ÓòÃû
+	# é›†ç¾¤ DNS åŸŸå
 	export CLUSTER_DNS_DOMAIN="cluster.local."
 
-	# µ±Ç°²¿ÊðµÄ»úÆ÷Ãû³Æ(Ëæ±ã¶¨Òå£¬Ö»ÒªÄÜÇø·Ö²»Í¬»úÆ÷¼´¿É)
+	# å½“å‰éƒ¨ç½²çš„æœºå™¨åç§°(éšä¾¿å®šä¹‰ï¼Œåªè¦èƒ½åŒºåˆ†ä¸åŒæœºå™¨å³å¯)
 	export NODE_NAME=etcd-host2 
-	# µ±Ç°²¿ÊðµÄ»úÆ÷ IP
+	# å½“å‰éƒ¨ç½²çš„æœºå™¨ IP
 	export NODE_IP=172.19.2.51
-	# etcd ¼¯ÈºËùÓÐ»úÆ÷ IP
+	# etcd é›†ç¾¤æ‰€æœ‰æœºå™¨ IP
 	export NODE_IPS="172.19.2.49 172.19.2.50 172.19.2.51"
-	# etcd ¼¯Èº¼äÍ¨ÐÅµÄIPºÍ¶Ë¿Ú 
+	# etcd é›†ç¾¤é—´é€šä¿¡çš„IPå’Œç«¯å£ 
 	export ETCD_NODES=etcd-host0=https://172.19.2.49:2380,etcd-host1=https://172.19.2.50:2380,etcd-host2=https://172.19.2.51:2380
 
-	# Ìæ»»Îª kubernetes maste ¼¯ÈºÈÎÒ»»úÆ÷ IP
+	# æ›¿æ¢ä¸º kubernetes maste é›†ç¾¤ä»»ä¸€æœºå™¨ IP
 	export MASTER_IP=172.19.2.49
 	export KUBE_APISERVER="https://${MASTER_IP}:6443"
 
 
-172.19.2.49¡¢172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ã€172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	mv /home/app/environment.sh /root/local/bin/
 	chown root:root /root/local/bin/environment.sh 
@@ -188,7 +191,7 @@ tags: kubernetes
 
 	export PATH=/root/local/bin:$PATH
 
-172.19.2.49ÉÏÖ´ÐÐ²Ù×÷
+172.19.2.49ä¸Šæ‰§è¡Œæ“ä½œ
 
 	mkdir ssl
 	cd ssl
@@ -245,16 +248,16 @@ tags: kubernetes
 	scp ca* root@172.19.2.50:/home/app/ca
 	scp ca* root@172.19.2.51:/home/app/ca
 
-172.19.2.50ºÍ172.19.2.51ÉÏÖ´ÐÐ²Ù×÷
+172.19.2.50å’Œ172.19.2.51ä¸Šæ‰§è¡Œæ“ä½œ
 
 	chown -R root:root /home/app/ca
 	mkdir -pv /etc/kubernetes/ssl
 	cp /home/app/ca/ca* /etc/kubernetes/ssl
 
 
-# ¶þ¡¢²¿Êð¸ß¿ÉÓÃetcd¼¯Èº #
+# äºŒã€éƒ¨ç½²é«˜å¯ç”¨etcdé›†ç¾¤ #
 
-172.19.2.49¡¢172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ã€172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	source /root/local/bin/environment.sh
 	wget https://github.com/coreos/etcd/releases/download/v3.1.6/etcd-v3.1.6-linux-amd64.tar.gz
@@ -341,7 +344,7 @@ tags: kubernetes
 	systemctl start etcd
 	systemctl status etcd
 
-ÔÚ172.19.2.49ÉÏÑéÖ¤¼¯Èº
+åœ¨172.19.2.49ä¸ŠéªŒè¯é›†ç¾¤
 
 	for ip in ${NODE_IPS}; do
 	  ETCDCTL_API=3 /root/local/bin/etcdctl \
@@ -352,18 +355,18 @@ tags: kubernetes
 	  endpoint health; done
 
 
-# Èý¡¢²¿ÊðKubectlÃüÁîÐÐ¹¤¾ß #
+# ä¸‰ã€éƒ¨ç½²Kubectlå‘½ä»¤è¡Œå·¥å…· #
   
-172.19.2.49¡¢172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ã€172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	vim /root/local/bin/environment.sh
-	# Ìæ»»Îªkubernetes¼¯Èºmastr»úÆ÷IP
+	# æ›¿æ¢ä¸ºkubernetesé›†ç¾¤mastræœºå™¨IP
 	export MASTER_IP=172.19.2.49
 	export KUBE_APISERVER="https://${MASTER_IP}:6443"
 
 	source /root/local/bin/environment.sh
 
-172.19.2.49ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ä¸Šéƒ½æ‰§è¡Œ
 
 	wget https://dl.k8s.io/v1.6.2/kubernetes-client-linux-amd64.tar.gz
 	tar -xzvf kubernetes-client-linux-amd64.tar.gz
@@ -401,29 +404,29 @@ tags: kubernetes
 	mv admin*.pem /etc/kubernetes/ssl/
 	rm admin.csr admin-csr.json
 
-	# ÉèÖÃ¼¯Èº²ÎÊý
+	# è®¾ç½®é›†ç¾¤å‚æ•°
 	kubectl config set-cluster kubernetes \
 	  --certificate-authority=/etc/kubernetes/ssl/ca.pem \
 	  --embed-certs=true \
 	  --server=${KUBE_APISERVER}
 
-	# ÉèÖÃ¿Í»§¶ËÈÏÖ¤²ÎÊý
+	# è®¾ç½®å®¢æˆ·ç«¯è®¤è¯å‚æ•°
 	kubectl config set-credentials admin \
 	  --client-certificate=/etc/kubernetes/ssl/admin.pem \
 	  --embed-certs=true \
 	  --client-key=/etc/kubernetes/ssl/admin-key.pem
 
-	# ÉèÖÃÉÏÏÂÎÄ²ÎÊý
+	# è®¾ç½®ä¸Šä¸‹æ–‡å‚æ•°
 	kubectl config set-context kubernetes \
 	  --cluster=kubernetes \
 	  --user=admin
 	  
-	# ÉèÖÃÄ¬ÈÏÉÏÏÂÎÄ
+	# è®¾ç½®é»˜è®¤ä¸Šä¸‹æ–‡
 	kubectl config use-context kubernetes
 
 	cat ~/.kube/config
 
-172.19.2.50¡¢172.19.2.51ÉÏÖ´ÐÐ
+172.19.2.50ã€172.19.2.51ä¸Šæ‰§è¡Œ
 
 	scp kubernetes-client-linux-amd64.tar.gz app@172.19.2.50:/home/app
 	scp kubernetes-client-linux-amd64.tar.gz app@172.19.2.51:/home/app
@@ -434,20 +437,20 @@ tags: kubernetes
 	chmod a+x /root/local/bin/kube*
 	mkdir ~/.kube/
 
-172.19.2.49ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ä¸Šéƒ½æ‰§è¡Œ
 
 	scp ~/.kube/config root@172.19.2.50:/home/app
 	scp ~/.kube/config root@172.19.2.51:/home/app
 
-172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	mv /home/app/config ~/.kube/
 	chown root:root ~/.kube/config
 
 
-# ËÄ¡¢²¿ÊðFlannelÍøÂç #
+# å››ã€éƒ¨ç½²Flannelç½‘ç»œ #
 
-172.19.2.49ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ä¸Šéƒ½æ‰§è¡Œ
 
 	cat > flanneld-csr.json <<EOF
 	{
@@ -480,19 +483,19 @@ tags: kubernetes
 	scp flanneld* root@172.19.2.50:/home/app/
 	scp flanneld* root@172.19.2.51:/home/app/
 
-172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	mv /home/app/flanneld* .
 	mv /home/app/flanneld* .
 
 
-172.19.2.49¡¢172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ã€172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	mkdir -p /etc/flanneld/ssl
 	mv flanneld*.pem /etc/flanneld/ssl
 	rm flanneld.csr  flanneld-csr.json
 
-172.19.2.49ÉÏÖ´ÐÐÒ»´Î£¨Ö»ÔÚmasterÉÏÖ´ÐÐÒ»´Î£¬ÆäËû½Úµã²»Ö´ÐÐ£©
+172.19.2.49ä¸Šæ‰§è¡Œä¸€æ¬¡ï¼ˆåªåœ¨masterä¸Šæ‰§è¡Œä¸€æ¬¡ï¼Œå…¶ä»–èŠ‚ç‚¹ä¸æ‰§è¡Œï¼‰
 
 	/root/local/bin/etcdctl \
 	  --endpoints=${ETCD_ENDPOINTS} \
@@ -542,37 +545,37 @@ tags: kubernetes
 	journalctl  -u flanneld |grep 'Lease acquired'
 	ifconfig flannel.1
 
-	# ²é¿´¼¯Èº Pod Íø¶Î(/16)
+	# æŸ¥çœ‹é›†ç¾¤ Pod ç½‘æ®µ(/16)
 	/root/local/bin/etcdctl \
 	   --endpoints=${ETCD_ENDPOINTS} \
 	   --ca-file=/etc/kubernetes/ssl/ca.pem \
 	   --cert-file=/etc/flanneld/ssl/flanneld.pem \
 	   --key-file=/etc/flanneld/ssl/flanneld-key.pem \
 	   get ${FLANNEL_ETCD_PREFIX}/config
-	Õý³£½á¹û
+	æ­£å¸¸ç»“æžœ
 	{"Network":"172.30.0.0/16", "SubnetLen": 24, "Backend": {"Type": "vxlan"}}
 
-	# ²é¿´ÒÑ·ÖÅäµÄ Pod ×ÓÍø¶ÎÁÐ±í(/24)
+	# æŸ¥çœ‹å·²åˆ†é…çš„ Pod å­ç½‘æ®µåˆ—è¡¨(/24)
 	/root/local/bin/etcdctl \
 	   --endpoints=${ETCD_ENDPOINTS} \
 	   --ca-file=/etc/kubernetes/ssl/ca.pem \
 	   --cert-file=/etc/flanneld/ssl/flanneld.pem \
 	   --key-file=/etc/flanneld/ssl/flanneld-key.pem \
 	   ls ${FLANNEL_ETCD_PREFIX}/subnets
-	Õý³£½á¹û
+	æ­£å¸¸ç»“æžœ
 	/kubernetes/network/subnets/172.30.27.0-24
 
-	# ²é¿´Ä³Ò» Pod Íø¶Î¶ÔÓ¦µÄ flanneld ½ø³Ì¼àÌýµÄ IP ºÍÍøÂç²ÎÊý
+	# æŸ¥çœ‹æŸä¸€ Pod ç½‘æ®µå¯¹åº”çš„ flanneld è¿›ç¨‹ç›‘å¬çš„ IP å’Œç½‘ç»œå‚æ•°
 	/root/local/bin/etcdctl \
 	   --endpoints=${ETCD_ENDPOINTS} \
 	   --ca-file=/etc/kubernetes/ssl/ca.pem \
 	   --cert-file=/etc/flanneld/ssl/flanneld.pem \
 	   --key-file=/etc/flanneld/ssl/flanneld-key.pem \
 	   get ${FLANNEL_ETCD_PREFIX}/subnets/172.30.27.0-24
-	Õý³£½á¹û
+	æ­£å¸¸ç»“æžœ
 	{"PublicIP":"172.19.2.49","BackendType":"vxlan","BackendData":{"VtepMAC":"9a:7b:7e:6a:2e:0b"}}
 
-172.19.2.49ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ä¸Šéƒ½æ‰§è¡Œ
 
 	/root/local/bin/etcdctl \
 	  --endpoints=${ETCD_ENDPOINTS} \
@@ -581,27 +584,27 @@ tags: kubernetes
 	  --key-file=/etc/flanneld/ssl/flanneld-key.pem \
 	  ls ${FLANNEL_ETCD_PREFIX}/subnets
 
-Õý³£½á¹û
+æ­£å¸¸ç»“æžœ
 
 	/kubernetes/network/subnets/172.30.27.0-24
 	/kubernetes/network/subnets/172.30.22.0-24
 	/kubernetes/network/subnets/172.30.38.0-24
 
-·Ö±ðpingÒÔÏÂµØÖ·£¬×¢Òâ×Ô¼ºping×Ô¼ºping²»Í¨
+åˆ†åˆ«pingä»¥ä¸‹åœ°å€ï¼Œæ³¨æ„è‡ªå·±pingè‡ªå·±pingä¸é€š
 
 	172.30.27.1
 	172.30.22.1
 	172.30.38.1
 
 
-# Îå¡¢²¿Êðmaster½Úµã #
+# äº”ã€éƒ¨ç½²masterèŠ‚ç‚¹ #
 
-kubernetes master ½Úµã°üº¬µÄ×é¼þ£º
+kubernetes master èŠ‚ç‚¹åŒ…å«çš„ç»„ä»¶ï¼š
 kube-apiserver
 kube-scheduler
 kube-controller-manager
 
-172.19.2.49ÉÏÖ´ÐÐ
+172.19.2.49ä¸Šæ‰§è¡Œ
 
 	wget https://github.com/kubernetes/kubernetes/releases/download/v1.6.2/kubernetes.tar.gz
 	tar -xzvf kubernetes.tar.gz
@@ -773,28 +776,28 @@ kube-controller-manager
 	systemctl start kube-scheduler
 	systemctl status kube-scheduler
 
-ÑéÖ¤½Úµã½¡¿µ×´¿ö
+éªŒè¯èŠ‚ç‚¹å¥åº·çŠ¶å†µ
 
 	kubectl get componentstatuses
 
 
-# Áù¡¢²¿ÊðNode½Úµã #
+# å…­ã€éƒ¨ç½²NodeèŠ‚ç‚¹ #
 
-kubernetes Node ½Úµã°üº¬ÈçÏÂ×é¼þ£º
+kubernetes Node èŠ‚ç‚¹åŒ…å«å¦‚ä¸‹ç»„ä»¶ï¼š
 flanneld
 docker
 kubelet
 kube-proxy
 
-172.19.2.49¡¢172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ã€172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
-	#°²×°docker
+	#å®‰è£…docker
 	yum install docker-ce
 	rpm -qa | grep docker
 	docker-ce-selinux-17.03.1.ce-1.el7.centos.noarch
 	docker-ce-17.03.1.ce-1.el7.centos.x86_64
 
-	#ÐÞ¸ÄdockerÆô¶¯ÎÄ¼þ£¬ÔÚÆô¶¯ÎÄ¼þÖÐ¼ÓÈëÒ»ÐÐ
+	#ä¿®æ”¹dockerå¯åŠ¨æ–‡ä»¶ï¼Œåœ¨å¯åŠ¨æ–‡ä»¶ä¸­åŠ å…¥ä¸€è¡Œ
 	vim /etc/systemd/system/docker.service
 	[Service]
 	Type=notify
@@ -812,22 +815,22 @@ kube-proxy
 	tar -xzvf  kubernetes-src.tar.gz
 	cp -r ./server/bin/{kube-proxy,kubelet} /root/local/bin/
 
-	# ÉèÖÃ¼¯Èº²ÎÊý
+	# è®¾ç½®é›†ç¾¤å‚æ•°
 	kubectl config set-cluster kubernetes \
 	  --certificate-authority=/etc/kubernetes/ssl/ca.pem \
 	  --embed-certs=true \
 	  --server=${KUBE_APISERVER} \
 	  --kubeconfig=bootstrap.kubeconfig
-	# ÉèÖÃ¿Í»§¶ËÈÏÖ¤²ÎÊý
+	# è®¾ç½®å®¢æˆ·ç«¯è®¤è¯å‚æ•°
 	kubectl config set-credentials kubelet-bootstrap \
 	  --token=${BOOTSTRAP_TOKEN} \
 	  --kubeconfig=bootstrap.kubeconfig
-	# ÉèÖÃÉÏÏÂÎÄ²ÎÊý
+	# è®¾ç½®ä¸Šä¸‹æ–‡å‚æ•°
 	kubectl config set-context default \
 	  --cluster=kubernetes \
 	  --user=kubelet-bootstrap \
 	  --kubeconfig=bootstrap.kubeconfig
-	# ÉèÖÃÄ¬ÈÏÉÏÏÂÎÄ
+	# è®¾ç½®é»˜è®¤ä¸Šä¸‹æ–‡
 	kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
 	mv bootstrap.kubeconfig /etc/kubernetes/
 
@@ -870,10 +873,10 @@ kube-proxy
 	systemctl status kubelet
 	journalctl -e -u kubelet
 
-172.19.2.49ÉÏÖ´ÐÐ
+172.19.2.49ä¸Šæ‰§è¡Œ
 
 	kubectl get csr
-	#×¢ÒâapproveºóÎªkubelet½ÚµãµÄNAME£¬´Ë´¦ÎªÍ¨¹ý½ÚµãµÄÑéÖ¤
+	#æ³¨æ„approveåŽä¸ºkubeletèŠ‚ç‚¹çš„NAMEï¼Œæ­¤å¤„ä¸ºé€šè¿‡èŠ‚ç‚¹çš„éªŒè¯
 	kubectl certificate approve csr-1w6sj
 	kubectl get csr
 	kubectl get nodes
@@ -913,30 +916,30 @@ kube-proxy
 	scp kube-proxy*.pem root@172.19.2.51:/home/lvqingshan
 	scp kube-proxy*.pem root@172.19.2.51:/home/lvqingshan
 
-172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	mv /home/lvqingshan/kube-proxy*.pem /etc/kubernetes/ssl/
 
-172.19.2.49¡¢172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.49ã€172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
-	# ÉèÖÃ¼¯Èº²ÎÊý
+	# è®¾ç½®é›†ç¾¤å‚æ•°
 	kubectl config set-cluster kubernetes \
 	  --certificate-authority=/etc/kubernetes/ssl/ca.pem \
 	  --embed-certs=true \
 	  --server=${KUBE_APISERVER} \
 	  --kubeconfig=kube-proxy.kubeconfig
-	# ÉèÖÃ¿Í»§¶ËÈÏÖ¤²ÎÊý
+	# è®¾ç½®å®¢æˆ·ç«¯è®¤è¯å‚æ•°
 	kubectl config set-credentials kube-proxy \
 	  --client-certificate=/etc/kubernetes/ssl/kube-proxy.pem \
 	  --client-key=/etc/kubernetes/ssl/kube-proxy-key.pem \
 	  --embed-certs=true \
 	  --kubeconfig=kube-proxy.kubeconfig
-	# ÉèÖÃÉÏÏÂÎÄ²ÎÊý
+	# è®¾ç½®ä¸Šä¸‹æ–‡å‚æ•°
 	kubectl config set-context default \
 	  --cluster=kubernetes \
 	  --user=kube-proxy \
 	  --kubeconfig=kube-proxy.kubeconfig
-	# ÉèÖÃÄ¬ÈÏÉÏÏÂÎÄ
+	# è®¾ç½®é»˜è®¤ä¸Šä¸‹æ–‡
 	kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
 	mv kube-proxy.kubeconfig /etc/kubernetes/
 
@@ -971,7 +974,7 @@ kube-proxy
 	systemctl start kube-proxy
 	systemctl status kube-proxy
 
-172.19.2.49ÉÏÖ´ÐÐ
+172.19.2.49ä¸Šæ‰§è¡Œ
 	cat > nginx-ds.yml << EOF
 	apiVersion: v1
 	kind: Service
@@ -1022,9 +1025,9 @@ kube-proxy
 	curl 10.254.194.173
 
 
-# Æß¡¢²¿ÊðDNS²å¼þ #
+# ä¸ƒã€éƒ¨ç½²DNSæ’ä»¶ #
 
-172.19.2.49ÉÏÖ´ÐÐ
+172.19.2.49ä¸Šæ‰§è¡Œ
 
 	mkdir -pv /home/lvqingshan/dns
 	cd /home/lvqingshan/dns
@@ -1108,9 +1111,9 @@ kube-proxy
 	exit
 
 
-# °Ë¡¢²¿ÊðDashboard²å¼þ #
+# å…«ã€éƒ¨ç½²Dashboardæ’ä»¶ #
 
-172.19.2.49ÉÏÖ´ÐÐ
+172.19.2.49ä¸Šæ‰§è¡Œ
 
 	mkdir dashboard
 	cd dashboard
@@ -1123,7 +1126,7 @@ kube-proxy
 	ls *.yaml
 	dashboard-controller.yaml  dashboard-rbac.yaml  dashboard-service.yaml
 
-	#Ôö¼ÓapiserverµØÖ·
+	#å¢žåŠ apiserveråœ°å€
 	vim dashboard-controller.yaml
 			ports:
 			- containerPort: 9090
@@ -1135,7 +1138,7 @@ kube-proxy
 			  timeoutSeconds: 30
 			args:
 			- --apiserver-host=http://172.19.2.49:8080
-	#Ôö¼ÓnodePort¶Ë¿Ú
+	#å¢žåŠ nodePortç«¯å£
 	vim dashboard-service.yaml
 	spec:
 	  type: NodePort
@@ -1159,7 +1162,7 @@ kube-proxy
 	kubectl get pods  -n kube-system | grep dashboard
 	kubernetes-dashboard-3677875397-8lhp3   1/1       Running   0          1m
 
-	#Í¨¹ý kubectl proxy ·ÃÎÊ dashboard
+	#é€šè¿‡ kubectl proxy è®¿é—® dashboard
 	kubectl proxy --address='172.19.2.49' --port=8086 --accept-hosts='^*$'
 
 	kubectl cluster-info
@@ -1167,14 +1170,14 @@ kube-proxy
 	KubeDNS is running at https://172.19.2.49:6443/api/v1/proxy/namespaces/kube-system/services/kube-dns
 	kubernetes-dashboard is running at https://172.19.2.49:6443/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard
 
-	#Í¨¹ý kube-apiserver ·ÃÎÊdashboard
-	ÔÚä¯ÀÀÆ÷ÖÐÊäÈëÒÔÏÂµØÖ··ÃÎÊ:
+	#é€šè¿‡ kube-apiserver è®¿é—®dashboard
+	åœ¨æµè§ˆå™¨ä¸­è¾“å…¥ä»¥ä¸‹åœ°å€è®¿é—®:
 	http://172.19.2.49:8080/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard
 
 
-# ¾Å¡¢²¿ÊðharborË½ÓÐ²Ö¿â #
+# ä¹ã€éƒ¨ç½²harborç§æœ‰ä»“åº“ #
 
-172.19.2.49ÉÏÖ´ÐÐ
+172.19.2.49ä¸Šæ‰§è¡Œ
 
 	source /root/local/bin/environment.sh
 
@@ -1227,29 +1230,29 @@ kube-proxy
 	ui_url_protocol = https
 	ssl_cert = /etc/harbor/ssl/harbor.pem
 	ssl_cert_key = /etc/harbor/ssl/harbor-key.pem
-	#µÇÂ¼harborµÄÕËºÅÃÜÂë
+	#ç™»å½•harborçš„è´¦å·å¯†ç 
 	harbor_admin_password = Harbor123456
 
 	./install.sh
 
-	#Í£Ö¹¡¢Æô¶¯
+	#åœæ­¢ã€å¯åŠ¨
 	docker-compose down -v
 	docker-compose up -d
 
-	#µÇÂ¼172.19.2.49
-	ÕËºÅ£ºadmin
-	ÃÜÂë£ºHarbor123456
+	#ç™»å½•172.19.2.49
+	è´¦å·ï¼šadmin
+	å¯†ç ï¼šHarbor123456
 
 
-	#ä¯ÀÀÆ÷µÇÂ¼²Ö¿âurl
+	#æµè§ˆå™¨ç™»å½•ä»“åº“url
 	https://172.19.2.49/
 
-	#ÉÏ´«±¾µØ¾µÏñµ½Ë½ÓÐ²Ö¿â
+	#ä¸Šä¼ æœ¬åœ°é•œåƒåˆ°ç§æœ‰ä»“åº“
 	docker login 172.19.2.49
 	docker tag quay.io/pires/docker-elasticsearch-kubernetes:5.4.0 172.19.2.49/library/docker-elasticsearch-kubernetes:5.4
 	docker push 172.19.2.49/library/docker-elasticsearch-kubernetes:5.4
 
-172.19.2.50¡¢172.19.2.51ÉÏ¶¼Ö´ÐÐ
+172.19.2.50ã€172.19.2.51ä¸Šéƒ½æ‰§è¡Œ
 
 	mkdir -pv /etc/docker/certs.d/172.19.2.49/
 
@@ -1258,17 +1261,17 @@ kube-proxy
 
 	yum install ca-certificates
 
-172.19.2.49ÉÏ´«Ö¤Êé
+172.19.2.49ä¸Šä¼ è¯ä¹¦
 
 	scp /etc/docker/certs.d/172.19.2.49/ca.crt root@172.19.2.50:/etc/docker/certs.d/172.19.2.49/
 	scp /etc/docker/certs.d/172.19.2.49/ca.crt root@172.19.2.51:/etc/docker/certs.d/172.19.2.49/
 
-172.19.2.50¡¢172.19.2.51µÇÂ¼harbor²Ö¿â
+172.19.2.50ã€172.19.2.51ç™»å½•harborä»“åº“
 	docker login 172.19.2.49
 
 
-# ¾Å¡¢Ð¡·½·¨ #
+# ä¹ã€å°æ–¹æ³• #
 
-ÒòÎªÎÒÓÃcalicoµÄ·½Ê½²¿Êð¹ý¼¯ÈºÍøÂç£¬ÈçºÎÉ¾³ý°²×°calico²úÉúµÄtunl0Íø¿¨
+å› ä¸ºæˆ‘ç”¨calicoçš„æ–¹å¼éƒ¨ç½²è¿‡é›†ç¾¤ç½‘ç»œï¼Œå¦‚ä½•åˆ é™¤å®‰è£…calicoäº§ç”Ÿçš„tunl0ç½‘å¡
 
 	modprobe -r ipip
