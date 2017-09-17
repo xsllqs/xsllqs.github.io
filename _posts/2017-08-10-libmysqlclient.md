@@ -1,7 +1,7 @@
 ---
 date: 2017-08-10 9:12:52+08:00
 layout: post
-title: 编译安装时出现/usr/bin/ld: cannot find -lxxx故障的解决方法
+title: 编译安装时出现依赖文件故障的解决方法
 categories: linux
 tags: 编译安装 故障
 ---
