@@ -1,11 +1,10 @@
 ﻿---
-date: 2017-08-20 11:12:52+08:00
+date: 2017-08-20 10:22:52+08:00
 layout: post
 title: zabbix高可用部署
 categories: linux
 tags: zabbix 高可用 zabbix-proxy
 ---
-
 
 4台主机：
 
