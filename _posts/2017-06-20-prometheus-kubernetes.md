@@ -1,21 +1,22 @@
 ---
-date: 2017-06-20 11:12:52+08:00
+date: 2017-06-20 08:12:52+08:00
 layout: post
-title: prometheus¼à¿Økubernetes
+title: prometheusç›‘æ§kubernetes
 categories: linux
 tags: kubernetes prometheus
 ---
 
-# Ò»¡¢ÔÚkuber-master£¨172.19.2.49£©ÉÏÏÂÔØgithubÉÏµÄprometheusÏîÄ¿ #
+
+# ä¸€ã€åœ¨kuber-masterï¼ˆ172.19.2.49ï¼‰ä¸Šä¸‹è½½githubä¸Šçš„prometheusé¡¹ç›® #
 
 	mkdir -pv /home/lvqingshan/prometheus/
 	git clone https://github.com/coreos/prometheus-operator.git
 
-# ¶ş¡¢½øÈëprometheusÄ¿Â¼£¬ĞŞ¸ÄÓ³Éä¶Ë¿Ú #
+# äºŒã€è¿›å…¥prometheusç›®å½•ï¼Œä¿®æ”¹æ˜ å°„ç«¯å£ #
 
 	cd /home/lvqingshan/prometheus/prometheus-operator/contrib/kube-prometheus
 
-	#ĞŞ¸ÄnodePortµ½kubernetesÔÊĞíµÄ·¶Î§
+	#ä¿®æ”¹nodePortåˆ°kuberneteså…è®¸çš„èŒƒå›´
 	vim manifests/prometheus/prometheus-k8s-service.yaml
 		nodePort: 8990
 
@@ -25,27 +26,27 @@ tags: kubernetes prometheus
 	vim manifests/alertmanager/alertmanager-service.yaml
 		nodePort: 8993
 
-# Èı¡¢²¿Êğprometheus #
+# ä¸‰ã€éƒ¨ç½²prometheus #
 
 	cd /home/lvqingshan/prometheus/prometheus-operator/contrib/kube-prometheus
-	#×¢ÒâÒòÎªprometheusµÄ²¿Êğ½Å±¾ÓÃÁËÏà¶ÔÂ·¾¶£¬ËùÒÔÒ»¶¨Òª½øÈë¿ËÂ¡µ½±¾µØµÄprometheusµÄprometheus-operator/contrib/kube-prometheusÄ¿Â¼À´Ö´ĞĞprometheusµÄ²¿ÊğÓëÒÆ³ı
+	#æ³¨æ„å› ä¸ºprometheusçš„éƒ¨ç½²è„šæœ¬ç”¨äº†ç›¸å¯¹è·¯å¾„ï¼Œæ‰€ä»¥ä¸€å®šè¦è¿›å…¥å…‹éš†åˆ°æœ¬åœ°çš„prometheusçš„prometheus-operator/contrib/kube-prometheusç›®å½•æ¥æ‰§è¡Œprometheusçš„éƒ¨ç½²ä¸ç§»é™¤
 
-	#²¿Êğ£º
+	#éƒ¨ç½²ï¼š
 	hack/cluster-monitoring/deploy
-	#ÒÆ³ı:
+	#ç§»é™¤:
 	hack/cluster-monitoring/teardown
 
-	#ÒòÎªÍøÂçÔ­Òò£¬ÏÂÔØimagesµÄËÙ¶È»á·Ç³£·Ç³£Âı£¬ÖÁÉÙ2-4Ğ¡Ê±²Å»á²¿ÊğºÃ
-	#²é¿´ÊÇ·ñ²¿ÊğºÃÓÃ£º
+	#å› ä¸ºç½‘ç»œåŸå› ï¼Œä¸‹è½½imagesçš„é€Ÿåº¦ä¼šéå¸¸éå¸¸æ…¢ï¼Œè‡³å°‘2-4å°æ—¶æ‰ä¼šéƒ¨ç½²å¥½
+	#æŸ¥çœ‹æ˜¯å¦éƒ¨ç½²å¥½ç”¨ï¼š
 	kubectl get pods -n monitoring
-	#Èç¹û½á¹ûÈ«²¿ÎªrunÔò²¿ÊğÍê³É
+	#å¦‚æœç»“æœå…¨éƒ¨ä¸ºrunåˆ™éƒ¨ç½²å®Œæˆ
 
-# ËÄ¡¢²¿ÊğÍê³Éºó²é¿´ #
+# å››ã€éƒ¨ç½²å®ŒæˆåæŸ¥çœ‹ #
 
-½øÈëkubernets-dashboard²é¿´grafana¶ÔÓ¦µÄpodËùÔÚµÄÖ÷»ú
+è¿›å…¥kubernets-dashboardæŸ¥çœ‹grafanaå¯¹åº”çš„podæ‰€åœ¨çš„ä¸»æœº
 
-ÕÒµ½serviceÖĞgrafanaµÄNodePort¶Ë¿Ú
+æ‰¾åˆ°serviceä¸­grafanaçš„NodePortç«¯å£
 
-ä¯ÀÀÆ÷ÖĞ·ÃÎÊ
+æµè§ˆå™¨ä¸­è®¿é—®
 
 http://172.19.2.51:8992
