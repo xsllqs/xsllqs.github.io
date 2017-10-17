@@ -1,7 +1,7 @@
 ---
 date: 2017-10-17 01:55:24+08:00
 layout: post
-title: jenkins触发式自动构建docker镜像并发布至kubernetes集群
+title: jenkins触发式自动构建tomcat镜像并发布至kubernetes集群
 categories: linux
 tags: jenkins docker harbor kubernetes k8s
 ---
