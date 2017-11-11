@@ -80,9 +80,9 @@ tags: jenkins docker harbor kubernetes k8s python
 
 在habor上创建ops仓库后才能push
 
-	docker tag obd:v1 192.168.13.45/ops/obd
+	docker tag obd:v1 172.19.2.139/ops/obd
 	docker login -p admin -u Cmcc@1ot -e 172.19.2.139
-	docker push 192.168.13.45/ops/obd
+	docker push 172.19.2.139/ops/obd
 
 	
 # 三、kubernets文件配置 #

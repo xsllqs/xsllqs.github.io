@@ -76,9 +76,9 @@ tags: jenkins docker harbor kubernetes k8s
 
 在habor上创建gcgj仓库后才能push
 
-	docker tag gcgj/portal:latest 192.168.13.45/gcgj/portal
+	docker tag gcgj/portal:latest 172.19.2.139/gcgj/portal
 	docker login -p admin -u Cmcc@1ot -e 172.19.2.139
-	docker push 192.168.13.45/gcgj/portal
+	docker push 172.19.2.139/gcgj/portal
 
 
 # 三、kubernets文件配置 #
