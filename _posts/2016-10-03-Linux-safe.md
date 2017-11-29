@@ -1,5 +1,5 @@
 ---
-date: 2016-10-3-Linux-safe 09:32:31+08:00
+date: 2016-10-03-Linux-safe 09:32:31+08:00
 layout: post
 title: Linux系统安全设置
 categories: linux

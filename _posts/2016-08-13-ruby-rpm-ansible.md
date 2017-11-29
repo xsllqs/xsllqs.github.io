@@ -1,5 +1,5 @@
 ---
-date: 2016-8-13-ruby-rpm-ansible 23:06:31+08:00
+date: 2016-08-13-ruby-rpm-ansible 23:06:31+08:00
 layout: post
 title: Centos6.5利用RubyGems的fpm制作zabbix_agent的rpm包，并使用ansible批量部署
 categories: linux
