@@ -268,6 +268,7 @@ http://www.cnblogs.com/liangDream/p/7358847.html
 
 master节点执行以下命令
 
+	kubeadm reset
 	echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
 	kubeadm init --kubernetes-version=v1.7.6
 
